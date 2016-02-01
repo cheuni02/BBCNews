@@ -1,0 +1,6 @@
+# config/cucumber.yml
+##YAML Template
+---
+
+
+wip:  --format CsvFormatter::CsvReport -o report.csv --expand --format json -o report.json --format pretty --tags @WIP --tags ~@Disabled HEADLESS=false
