@@ -1,10 +1,8 @@
 require 'watir-webdriver'
-require 'webdriver-user-agent'
 require 'cucumber'
 require 'require_all'
 require 'rake'
 require 'rest-client'
-require 'wait-until'
 require 'json'
 require 'rspec/expectations'
 require 'pry'
@@ -39,7 +37,7 @@ browser.window.resize_to 1240, 1024
 class CustomWorld
   class << self; attr_accessor :browser end
   def site
-    @site ||= (EssoBase.new(CustomWorld::browser))
+    @site ||= (BBCBase.new(CustomWorld::browser))
   end
 end
 CustomWorld.browser = browser

@@ -3,4 +3,4 @@
 ---
 
 
-wip:  --format CsvFormatter::CsvReport -o report.csv --expand --format json -o report.json --format pretty --tags @WIP --tags ~@Disabled HEADLESS=false
+wip: --tags @WIP --expand --format pretty

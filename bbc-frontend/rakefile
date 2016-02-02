@@ -6,7 +6,7 @@ namespace :bbc_site do
   desc "regression on BBC News"
   task :bbc_news, [:path] do |t, args|
     ENV['BBC_PATH'] = args[:path]
-    Cucumber::Rake::Task.new(:run) do
+    Cucumber::Rake::Task.new(:run) do |task|
       task.profile = "wip"
     end
     Rake::Task[:run].invoke()

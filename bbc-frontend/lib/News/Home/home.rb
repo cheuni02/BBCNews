@@ -1,0 +1,4 @@
+class NewsHome < BBCBase
+
+
+end
