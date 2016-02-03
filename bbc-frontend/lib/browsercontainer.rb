@@ -3,7 +3,8 @@ class BrowserContainer
     @browser = browser
   end
 
-  def visit
-    @browser.goto('http://www.bbc.co.uk/' << ENV['BBC_PATH'])
+  def visit(path)
+    #path = ENV['BBC_PATH'].to_s
+    @browser.goto("#{ENV['BBC_HOST']}/" << path)
   end
 end

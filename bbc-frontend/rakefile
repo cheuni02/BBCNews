@@ -4,8 +4,8 @@ require 'fileutils'
 
 namespace :bbc_site do
   desc "regression on BBC News"
-  task :bbc_news, [:path] do |t, args|
-    ENV['BBC_PATH'] = args[:path]
+  task :bbc_news, [:host] do |t, args|
+    ENV['BBC_HOST'] = args[:host]
     Cucumber::Rake::Task.new(:run) do |task|
       task.profile = "wip"
     end
