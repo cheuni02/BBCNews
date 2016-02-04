@@ -1,4 +1,5 @@
 require 'watir-webdriver'
+require 'watir-page-helper'
 require 'cucumber'
 require 'require_all'
 require 'rake'

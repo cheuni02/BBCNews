@@ -1,7 +1,8 @@
 Given(/^I am on the BBC News homepage$/) do
-  site.visit('news')
+  @page = NewsHome.new(@browser,true)
+  site.news_home.visit('news')
 end
 
 Then(/^I should see the BBC News title$/) do
-  #pending
+  expect(@page.expected_title).to eq("Home - BBC News")
 end
