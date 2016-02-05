@@ -7,6 +7,7 @@ require 'rest-client'
 require 'json'
 require 'rspec/expectations'
 require 'pry'
+require 'minitest'
 
 require_all 'lib'
 
