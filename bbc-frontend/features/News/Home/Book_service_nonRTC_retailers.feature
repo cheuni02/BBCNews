@@ -1,13 +1,13 @@
-Feature: OSB Emissions Fix - Book service for non RTC retailers (VWOSBEB-1)
-  Given that I am a VW customer affected by the emissions and received a letter by VW for a fix
-  Then When I Book a service, as long as I provide my vehicle's VIN number
-  Then I will get services for free
-  Note In the OSB, the user will enter his Reg number - we will need to get the corresponding VIN in order to match it to the VINs list
+Feature: OSB Emissions Fix - Book service for non RTC retailers (VWOSBEB-3)
+  As a Car owner who has received an emissions fix notification
+  I want to Book the emissions fix online (with a non-RTC retailer)
+  So that I can have my car fixed
 
 Background: pre-requisites
   Given the user is on the OSB first page
   And has selected a retailer from postcode : AAAA
   And has entered vehicle registration number: BBBB
+  And retailer is not RTC
 
 Scenario:  my car is on the affected VINs list - the emissions fix work should be available in the list FOC
   Given my car is on the affected cars list and i have provided the VIN on the first step
@@ -29,10 +29,12 @@ Scenario: I have selected the emissions fix work : the Convenience options shoul
 
 Scenario Outline: the 'Real time' (to be taken out of diary) depends on my engine size
   Given I am on the "Your Vehicle" page
-  And I have provided my car engine: <size>
+  And I have provided my car engine: <size> #
   When I select the emissions fix work
   Then the work code should be <job>
-  And <time> should be taken out of the diary
+  And <time> should be taken out of the diary in RCMS (both RTC and NOn RTC)
+  And stored in RCMS
+
 
 Examples:
 |size|job                |time|

@@ -1,7 +1,9 @@
 class BrowserContainer
-  #include Minitest::Assertions
+
+  #include PageObject
   include WatirPageHelper
-  include PageObject
+  include Minitest::Assertions
+
 
 
   # attr_accessor:direct_url
@@ -11,10 +13,10 @@ class BrowserContainer
   direct_url BBC_URL
   expected_title "Home - BBC News"
 
-  # text_field(:username, :id => 'username')
+  #text_field(:username, :id => 'username')
   # text_field(:password, :id => 'password')
   # button(:login, :id => 'login')
-  # button(:find_local, :class => 'find-local-wide__link')
+  #button(:find_local, :class => 'find-local-wide__link')
 
 
   def initialize(browser, visit = true)
@@ -22,7 +24,7 @@ class BrowserContainer
     goto if visit
 
     response = RestClient.get BBC_URL
-    assert_equal response.code,200
+    assert_equal 200,response.code
     #expect(response.code).to eq(200)
 
     has_expected_title? if respond_to? :has_expected_title
