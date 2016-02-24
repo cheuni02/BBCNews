@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    ansi (1.5.0)
     builder (3.2.2)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
@@ -25,8 +26,11 @@ GEM
     faker (1.6.1)
       i18n (~> 0.5)
     ffi (1.9.10)
+    ffi (1.9.10-x64-mingw32)
+    ffi (1.9.10-x86-mingw32)
     gherkin (3.2.0)
-    headless (2.2.0)
+    hashie (3.4.3)
+    headless (2.2.2)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -35,11 +39,20 @@ GEM
     method_source (0.8.2)
     mime-types (2.99)
     mini_portile2 (2.0.0)
-    minitest (5.8.4)
+    minitest (4.3.3)
+    minitest-reporters (0.14.24)
+      ansi
+      builder
+      minitest (>= 2.12, < 5.0)
+      powerbar
     multi_json (1.11.2)
     multi_test (0.1.2)
     netrc (0.11.0)
     nokogiri (1.6.7)
+      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.7-x64-mingw32)
+      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.7-x86-mingw32)
       mini_portile2 (~> 2.0.0.rc2)
     page-object (1.1.1)
       page_navigation (>= 0.9)
@@ -47,6 +60,8 @@ GEM
       watir-webdriver (>= 0.6.11)
     page_navigation (0.9)
       data_magic (>= 0.14)
+    powerbar (1.0.17)
+      hashie (>= 1.1.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -57,12 +72,22 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rest-client (1.8.0-x64-mingw32)
+      ffi (~> 1.9)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    rest-client (1.8.0-x86-mingw32)
+      ffi (~> 1.9)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     rspec-expectations (3.4.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
     rubyzip (1.1.7)
-    selenium-webdriver (2.50.0)
+    selenium-webdriver (2.52.0)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
@@ -71,6 +96,8 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
+    unf_ext (0.0.7.2-x64-mingw32)
+    unf_ext (0.0.7.2-x86-mingw32)
     watir-page-helper (1.0.3)
       watir-webdriver
     watir-webdriver (0.9.1)
@@ -80,12 +107,15 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
+  x86-mingw32
 
 DEPENDENCIES
   cucumber
   headless
   markaby
   minitest
+  minitest-reporters (>= 0.5.0)
   nokogiri (= 1.6.7)
   page-object
   pry
@@ -96,3 +126,6 @@ DEPENDENCIES
   selenium-webdriver
   watir-page-helper
   watir-webdriver
+
+BUNDLED WITH
+   1.10.6
