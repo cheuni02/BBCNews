@@ -1,0 +1,26 @@
+
+Critical Xpaths in:
+A) Registration feature (rggistration.feature)
+
+
+
+B) Sign in feature (sign_in.feature)
+C) Add, remove and watch feature (add_remove_programme.feature) in
+
+
+ http://www.bbc.co.uk/iplayer/favourites:
+ 1) //*[@id="programme-container"] : contains all the programmes being flaged as a favourite
+
+     such as the first video : //*[@id='programme-container']/li[@data-pid="b06zyt4z"]
+     and the second : //*[@id='programme-container']/li[@data-pid="b006m86d"]
+
+ 2) the remove buttons for a specific video in his case a video with @data-pid="b006m86d":
+
+    //*[@id='programme-container']/li[@data-pid="b006m86d"]/div[@class="remove-block"]/button[@title="Remove"]
+    //*[@id='programme-container']/li[@data-pid="b006m86d"]/div[@class="remove-block"]/button[@title="Are you sure?"]
+
+
+
+ 3) the play button on one of the videos (this this case video where @data-pid="b006m86d)
+
+    //*[@id='tip']/div/div/div[@class="preplay is-visible"]/button

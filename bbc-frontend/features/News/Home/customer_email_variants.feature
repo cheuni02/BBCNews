@@ -16,18 +16,17 @@ Scenario: car owner has only booked emissions fix services (new)
   Given he has selected emissions fix and not booked other additional service at "select work"
   And when he selects a date and time at "select date"
   And provides his personal details with his email address at "Your details"
-  Then an email containing template emissions fix only should be sent to his email address after "Review & Confirm"
+  Then a standard email will be sent to user with services booked
 
 Scenario: car owner has booked emissions fix service and additional services (new)
   Given he has selected emissions fix and another additional service at "select work"
   And when he selects a date and time at "select date"
   And provides his personal details with his email address at "Your details"
-  Then an email containing email template emissions fix and other services should be sent to his email address after "Review & Confirm"
+  Then a standard email will be sent to user with services booked
 
 Scenario: car owner has booked some services, but not the emissions fix (existing)
   Given a car owner has selected some services at "select work"
   But he has not booked the emissions fix
   And when he selects a date and time at "select date"
   And provides his personal details with his email address at "Your details"
-  Then an email containing the regular email template should be sent to his email address after "Review & Confirm"
-
+  Then a standard email will be sent to user with services booked
