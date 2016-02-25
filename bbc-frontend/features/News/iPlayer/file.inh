@@ -1,5 +1,14 @@
+Issues found with site (http://www.bbc.co.uk/iplayer) whilst completing this task:
+===================================================
 
-Critical Xpaths in:
+1) Registration/ signing in - user can only register a BBC iD with a username which is in the format of an email address, but can sign in afterwards with a format which is just a string or an email address. How do users register with jsut a string as their username?
+
+2) Signing in - when not entering a username or password and pressing 'sign in' it gives a validation message 'This is too short' when it should be 'Please Enter Username/password'
+
+
+Critical Xpaths found in:
+=========================
+
 A) Registration feature (rggistration.feature)
 
 
@@ -14,7 +23,7 @@ C) Add, remove and watch feature (add_remove_programme.feature) in
      such as the first video : //*[@id='programme-container']/li[@data-pid="b06zyt4z"]
      and the second : //*[@id='programme-container']/li[@data-pid="b006m86d"]
 
- 2) the remove buttons for a specific video in his case a video with @data-pid="b006m86d":
+ 2) the remove buttons for a specific video in this case a video with @data-pid="b006m86d":
 
     //*[@id='programme-container']/li[@data-pid="b006m86d"]/div[@class="remove-block"]/button[@title="Remove"]
     //*[@id='programme-container']/li[@data-pid="b006m86d"]/div[@class="remove-block"]/button[@title="Are you sure?"]
