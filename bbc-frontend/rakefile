@@ -11,4 +11,13 @@ namespace :bbc_site do
     end
     Rake::Task[:run].invoke()
   end
+
+  desc "test the BBC iPlayer"
+  task :iplayer, [:host] do |t, args|
+    ENV['BBC_HOST'] = args[:host]
+    Cucumber::Rake::Task.new(:run) do |task|
+      task.profile = "iplayer_add_remove"
+    end
+    Rake::Task[:run].invoke()
+  end
 end

@@ -12,7 +12,7 @@ A) sign in button from the bbc iplayer homepage
 
     //*[@id="idcta-link']
 
-A) Registration feature (registration.feature)
+B) Registration feature (registration.feature)
 
     1) Email field: //input[@id="bbcid_email"]
     2) New Password field: //input[@id="bbcid_createpassword"]
@@ -20,7 +20,7 @@ A) Registration feature (registration.feature)
     4) Register submit button: //input[@id="bbcid_submit_button"]
     5) one of the validation messages (for New password field): //span[@class="bbcid-label-hint"]
 
-B) Sign in feature (sign_in.feature)
+C) Sign in feature (sign_in.feature)
 
     1) Email/ Username: //input[@id="bbcid_unique"]
     2) Password: //input[@id="bbcid_password"]
@@ -28,7 +28,7 @@ B) Sign in feature (sign_in.feature)
     4) Forgot password link: //a[@href="https://ssl.bbc.co.uk/id/recover"]
     5) 'remember me' checkbox: //form[@id='bbcid-signin-form']/div[1]/div[3]/a
 
-C) Add, remove and watch feature (add_remove_programme.feature) in
+D) Add, remove and watch feature (add_remove_programme.feature) in
 
  ADD: e.g. http://www.bbc.co.uk/iplayer/episode/b007c11h/the-life-of-mammals-2-insect-hunters
  1) the add to favourites button: //button[@class="favourites link"]

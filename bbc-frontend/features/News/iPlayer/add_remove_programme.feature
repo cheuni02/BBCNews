@@ -1,3 +1,4 @@
+@add_remove_programme
 Feature: Adding, Removing and watching programmes to/ from your favourites
   As a registered BBC user with a BBC iD
   I should be able to add or remove programmes to my 'Favourites'
@@ -69,7 +70,7 @@ Scenario Outline: Attempt to access 'My Programmes' before signing in (negative)
     | Favourites | Keep track of your favourite programmes  |
 
 
-Scenario: Accessing the 'My Programmes' page after signing in where user has favourites and is watching a programme (edge case)
+Scenario Outline: Accessing the 'My Programmes' page after signing in where user has favourites and is watching a programme (edge case)
   Given I have signed in with existing email: 'test@gmail.com', and password: 'abcdefghijk'
   And User has added 3 programmes, deleted one and watching another
   When I click on 'My Programmes'
