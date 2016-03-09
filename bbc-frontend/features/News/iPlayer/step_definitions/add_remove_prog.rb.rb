@@ -1,9 +1,11 @@
-Given(/^I am in the BBC iPlayer homepage$/) do
-  site.iplayer_home.visit_page
-end
+
 
 When(/^I sign in with existing BBC account \- email: '(.*)', and password: '(.*)'$/) do |email, password|
   site.iplayer_home.click_signin
+  page = site.signin_page
+  page.username.set(email)
+  page.password.set(password)
+  page.signin.click
 end
 
 Given(/^I have signed in as a test user with no videos added to My Programmes > Favourites$/) do

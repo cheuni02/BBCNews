@@ -1,3 +1,4 @@
+@register
 Feature: Register New BBC user
   As a user
   I want to be able to register to the BBC site to obtain a BBC iD
@@ -6,7 +7,7 @@ Feature: Register New BBC user
 # pre-requisites
 
 Background: navigating to register page for a new user
-  Given I am on the BBC iPlayer page 'http://www.bbc.co.uk/iplayer'
+  Given I am in the BBC iPlayer homepage
   When I click on 'Sign In'
   Then I should arrive to the 'Sign in - BBC iD' page
   And when I click on the link on 'Don't have a BBC iD? Please register.'
