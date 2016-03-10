@@ -1,22 +1,22 @@
 When(/^I click on 'Sign In'$/) do
-  site.iplayer_home.click_signin
+  site.my_bbc.sign_in.click
 end
 
 Then(/^I should arrive to the 'Sign in \- BBC iD' page$/) do
-  expect(site.page_url).to match(/https\:\/\/ssl.bbc.co.uk\/id\/signin/)
+  #expect(site.page_url).to match(/https\:\/\/ssl.bbc.co.uk\/id\/signin/)
+  expect(site.signin_page.account_header("Sign in").present?).to eq(true)
 end
 
 And(/^when I click on the link on 'Don't have a BBC iD\? Please register\.'$/) do
-  site.signin_page.register_link.click
+  site.signin_page.register_link.when_present.click
 end
 
 Then(/^I should arrive to the 'Register \- BBC iD' page$/) do
-  expect(site.page_url).to match(/https\:\/\/ssl.bbc.co.uk\/id\/register/)
+  #expect(site.page_url).to match(/https\:\/\/ssl.bbc.co.uk\/id\/register/)
+  expect(site.signin_page.account_header("Register").present?).to eq(true)
 end
 
-Given(/^I already have set up an email address set up$/) do
-  ENV['EMAIL'] = "#{Time.now.to_i}-test@example.com"
-end
+
 
 When(/^I type that email address into the Email field$/) do
   @page = site.signin_page
@@ -33,7 +33,7 @@ And(/^retype it in 'Confirm password'$/) do
 end
 
 And(/^press 'Register'$/) do
-  @page.register.click
+  @page.register.when_present.click
 end
 
 Then(/^I should be taken to the (.*) page$/) do |word|
@@ -47,38 +47,22 @@ And(/^I should recieve an email$/) do
 end
 
 And(/^I should be able to log out$/) do
-  @page.your_account.click
-  @page.sign_out.click
+  @page.your_account.when_present.click
+  sleep(2)
+  @page.sign_out.when_present.click
 end
 
-Given(/^I have an already registered BBC iD user with an email address$/) do
 
-  if ENV['REG_STATUS'] != "registered"
-    steps %(
-      Given I already have set up an email address set up
-      When I type that email address into the Email field
-      And I type a password which is valid ie more than 6 characters : '1234567'
-      And retype it in 'Confirm password'
-      And press 'Register'
-      Then I should be taken to the Your registration is complete page
-      And I should recieve an email
-    )
-  end
-end
 
 Then(/^a red exclamation mark shows on the field$/) do
 end
 
 And(/^a validation message should appear: 'This email address is already registered'$/) do
-  binding.pry
-  expect(@page.already_exists_message.present?).to be true
-
+  Watir::Wait.until {@page.already_exists_message.exists?}
+  expect(@page.already_exists_message).to be_present
 end
 
-Given(/^I have an email address not registered with BBC before$/) do
-  step %(Given I already have set up an email address set up)
 
-end
 
 Then(/^a green tick appears on the field$/) do
 

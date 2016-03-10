@@ -23,6 +23,10 @@ class Account < BBCBase
     submit_button("Register")
   end
 
+  def account_header(title)
+    @browser.div(class: "bbcid-header").h1(text: title)
+  end
+
   def text_shown
     @browser.div(class: "bbcid-content").text
   end
@@ -41,6 +45,6 @@ class Account < BBCBase
   end
 
   def already_exists_message
-    @browser.div(class: "bbcid_error")#.span(class: "bbc_validation_service_emailexists")
+    @browser.div(class: "bbcid-error").label.span(class: "bbcid_validation_service_emailexists")
   end
 end
