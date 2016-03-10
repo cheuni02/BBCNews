@@ -16,22 +16,24 @@ Background: navigating to register page for a new user
 # user story test cases
 
 Scenario: Register successfully with an existing email and a new password (end to end happy path)
-  Given I already have set up an email address: 'test1@test.com'
+  Given I already have set up an email address set up
   When I type that email address into the Email field
   And I type a password which is valid ie more than 6 characters : '1234567'
   And retype it in 'Confirm password'
   And press 'Register'
-  Then I should be taken to the registration successful confirmation page
-  And I should recieve an email in: 'test1@test.com'
+  Then I should be taken to the Your registration is complete page
+  And I should recieve an email
+  And I should be able to log out
+
 
 Scenario: Verify that previously registered emails aren't retyped (negative)
-  Given I have an already registered BBC iD user with email address: 'test1@test.com'
+  Given I have an already registered BBC iD user with an email address
   When I type that email address into the Email field
-  Then a red exclamtion mark shows on the field
+  Then a red exclamation mark shows on the field
   And a validation message should appear: 'This email address is already registered'
 
 Scenario: Verify that an email address not registered with BBC before can be typed
-  Given I already have set up an email address: 'test1@test.com'
+  Given I have an email address not registered with BBC before
   When I type that email address into the Email field
   Then a green tick appears on the field
 

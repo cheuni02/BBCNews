@@ -3,8 +3,8 @@
 When(/^I sign in with existing BBC account \- email: '(.*)', and password: '(.*)'$/) do |email, password|
   site.iplayer_home.click_signin
   page = site.signin_page
-  page.username.set(email)
-  page.password.set(password)
+  page.username("bbcid_unique").set(email)
+  page.password("bbcid_password").set(password)
   page.signin.click
 end
 
