@@ -62,22 +62,19 @@ And(/^a validation message should appear: 'This email address is already registe
   expect(@page.already_exists_message).to be_present
 end
 
-
-
 Then(/^a green tick appears on the field$/) do
-
 end
 
 When(/^I type in the email field \- '(.*)', which (.*)$/) do |email, test|
-
+  @page.username("bbcid_email").set(email)
 end
 
 Then(/^an orange exclamation mark shows on the field$/) do
-
 end
 
 And(/^there's a validation message showing \- '(.*)'$/) do |validation_message|
-
+  Watir::Wait.until {@page.email_address_invalid.exists?}
+  expect(@page.email_address_invalid).to be_present
 end
 
 When(/^I type in the New password field \- '(.*)', which (.*)$/) do |password, test|
@@ -153,3 +150,6 @@ And(/^confirm deletion on the next page$/) do
 end
 
 
+And(/^no label hint shows$/) do
+  expect(@page.already_exists_message).not_to be_present
+end

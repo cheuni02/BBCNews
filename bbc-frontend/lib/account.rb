@@ -47,4 +47,8 @@ class Account < BBCBase
   def already_exists_message
     @browser.div(class: "bbcid-error").label.span(class: "bbcid_validation_service_emailexists")
   end
+
+  def email_address_invalid
+    @browser.div(class: "bbcid-warning").label.span(class: "bbcid_validation_format_emailaddress")
+  end
 end

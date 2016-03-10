@@ -36,6 +36,7 @@ Scenario: Verify that an email address not registered with BBC before can be typ
   Given I have an email address not registered with BBC before
   When I type that email address into the Email field
   Then a green tick appears on the field
+  And no label hint shows
 
 Scenario Outline: Verify that there are validation checks on the format of the email/username (negative)
   When I type in the email field - '<email>', which <test>
