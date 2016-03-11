@@ -44,15 +44,32 @@ class Account < BBCBase
     @browser.link(class: "id4-cta-signout")
   end
 
+  def error_label
+    @browser.div(class: "bbcid-error").label
+  end
+
+  def warning_label(section)
+    @browser.div(class: "#{section} bbcid-warning").label
+  end
+
   def already_exists_message
-    @browser.div(class: "bbcid-error").label.span(class: "bbcid_validation_service_emailexists")
+    error_label.span(class: "bbcid_validation_service_emailexists")
   end
 
   def email_address_invalid
-    @browser.div(class: "bbcid-warning").label.span(class: "bbcid_validation_format_emailaddress")
+    warning_label("email-container").span(class: "bbcid_validation_format_emailaddress")
   end
+
+  def password_too_short_message
+    warning_label("createpassword-container").span(class: "bbcid_validation_stringlength_greaterthan5")
+  end
+
 
   def tab_out
     @browser.send_keys :tab
+  end
+
+  def sign_out_confirmation
+    @browser.div(class: "bbcid-content signedout-icon")
   end
 end

@@ -47,62 +47,66 @@ Scenario Outline: Verify that there are validation checks on the format of the e
     | email       | test                                            | validation message               |
     | steve@      | does not have an <string>.<string> following it | This isn't quite an email address|
     | steve@gmail | does not have an .<string> following it         | This email address is not valid  |
-    |             | is null                                         | Please enter your username       |
 
 
-Scenario Outline: Verify that there are validation checks on the password entered (negative)
-  When I type in the New password field - '<password>', which <test>
-  Then an orange exclamation mark shows on the field
-  And There's a validation message showing - '<validation message>'
+Scenario: Verify that there are validation messages even when nothing is entered into the email and apssword fields
+  When I type in the email field - '', which tests that the validation messages appear when the fields are not entered and Register pressed
+  And press 'Register'
+  Then there should be 2 validation messages one for the email and one for the password
 
-  Examples:
-    | password                                            | test                                                         | validation message         |
-    | a                                                   | 1 character, below the 6 character minimum for a password    | This is too short          |
-    | abdce                                               | 5 characters, below the 6 character minimum for a password   | This is too short          |
-    | axczczxczxczxzczxczxczxczxczxczxczczxczxczx!@£$1234 | 51 characters, above the 50 character maximum for a password | This is too long           |
-    | axczczxczxczxz!@£$1234xczxczxczxczczxczxczxczxbnb   | 49 characters, below the 6 character minimum for a password  | This is too short          |
-    |                                                     | is null                                                      | Please enter your password |
-
-Scenario Outline: Verify that a validation message appears when the first and confirmation passwords entered don't match and user cannot proceed registration
-  Given I type email 'test1@test.com' into Email field
-  When I type in the New password field - '<new password>'
-  And I type in the Confirmation password field - '<confirm password>'
-  Then an orange exclamation mark shows on the field
-  And There's a validation message showing - '<validation message>'
-  And The 'Register' button is disabled
-
-  Examples:
-    | new password | confirm password | validation message    |
-    | abcdefgh     |                  | These do not match    |
-    |              | abcdefgh         | This is too short     |
-    | abcd1234     | abcd12345        | These do not match    |
-    | ABCD1234     | abcd1234         | These do not match    |
-
-Scenario Outline: verify that password format validation messages take priority over mismatch messages
-  Given I type email 'test1@test.com' into Email field
-  When I type in the New password field - '<new password>' which is <test>
-  And I type in the Confirmation password field - '<confirm password>' which does not match
-  But since the password format validation messages are a priority over the mismatch messages
-  Then the format validation message should show <validation message> instead
-
-  Examples:
-  | new password | confirm password  | test                                                         | validation message         |
-  | a            | ab                | 1 character, below the 6 character minimum for a password    | This is too short          |
-  | abdce        | abc               | 5 characters, below the 6 character minimum for a password   | This is too short          |
-
-
-# other test cases
-
-Scenario: User decides to 'Cancel' registering (positive)
-  Given I have landed on the 'BBC iD Sign In' page
-  When I click on 'Cancel'
-  Then I should be taken back to the iPlayer homepage
-  And the 'sign in' button remains as 'sign in'
-
-# rollback
-
-Scenario: Rollback - Delete your BBC iD so that user can be re-used if the tests above were re-run
-  Given I have removed both Facebook and Google links to my account
-  And I am on 'Your Details' page
-  When I click on 'Delete your BBC iD'
-  And confirm deletion on the next page
+#Scenario Outline: Verify that there are validation checks on the password entered (negative)
+#  When I type in the New password field - '<password>', which <test>
+#  Then an orange exclamation mark shows on the field
+#  And There's a validation message showing - '<validation message>'
+#
+#  Examples:
+#    | password                                            | test                                                         | validation message         |
+#    | a                                                   | 1 character, below the 6 character minimum for a password    | This is too short          |
+#    | abdce                                               | 5 characters, below the 6 character minimum for a password   | This is too short          |
+#    | axczczxczxczxzczxczxczxczxczxczxczczxczxczx!@£$1234 | 51 characters, above the 50 character maximum for a password | This is too long           |
+#    | axczczxczxczxz!@£$1234xczxczxczxczczxczxczxczxbnb   | 49 characters, below the 6 character minimum for a password  | This is too short          |
+#    |                                                     | is null                                                      | Please enter your password |
+#
+#Scenario Outline: Verify that a validation message appears when the first and confirmation passwords entered don't match and user cannot proceed registration
+#  Given I type email 'test1@test.com' into Email field
+#  When I type in the New password field - '<new password>'
+#  And I type in the Confirmation password field - '<confirm password>'
+#  Then an orange exclamation mark shows on the field
+#  And There's a validation message showing - '<validation message>'
+#  And The 'Register' button is disabled
+#
+#  Examples:
+#    | new password | confirm password | validation message    |
+#    | abcdefgh     |                  | These do not match    |
+#    |              | abcdefgh         | This is too short     |
+#    | abcd1234     | abcd12345        | These do not match    |
+#    | ABCD1234     | abcd1234         | These do not match    |
+#
+#Scenario Outline: verify that password format validation messages take priority over mismatch messages
+#  Given I type email 'test1@test.com' into Email field
+#  When I type in the New password field - '<new password>' which is <test>
+#  And I type in the Confirmation password field - '<confirm password>' which does not match
+#  But since the password format validation messages are a priority over the mismatch messages
+#  Then the format validation message should show <validation message> instead
+#
+#  Examples:
+#  | new password | confirm password  | test                                                         | validation message         |
+#  | a            | ab                | 1 character, below the 6 character minimum for a password    | This is too short          |
+#  | abdce        | abc               | 5 characters, below the 6 character minimum for a password   | This is too short          |
+#
+#
+## other test cases
+#
+#Scenario: User decides to 'Cancel' registering (positive)
+#  Given I have landed on the 'BBC iD Sign In' page
+#  When I click on 'Cancel'
+#  Then I should be taken back to the iPlayer homepage
+#  And the 'sign in' button remains as 'sign in'
+#
+## rollback
+#
+#Scenario: Rollback - Delete your BBC iD so that user can be re-used if the tests above were re-run
+#  Given I have removed both Facebook and Google links to my account
+#  And I am on 'Your Details' page
+#  When I click on 'Delete your BBC iD'
+#  And confirm deletion on the next page

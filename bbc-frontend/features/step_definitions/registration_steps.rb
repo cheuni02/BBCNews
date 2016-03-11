@@ -36,7 +36,8 @@ And(/^retype it in 'Confirm password'$/) do
 end
 
 And(/^press 'Register'$/) do
-  Watir::Wait.while{@page.register(' disabled').present?}
+  #Watir::Wait.while{@page.register(' disabled').present?}
+  Watir::Wait.until {@page.register.present?}
   @page.register.when_present.click
 end
 
@@ -54,6 +55,8 @@ And(/^I should be able to log out$/) do
   @page.your_account.when_present.click
   sleep(2)
   @page.sign_out.when_present.click
+  Watir::Wait.until {@page.sign_out_confirmation.present?}
+  #binding.pry
 end
 
 
@@ -62,8 +65,8 @@ Then(/^a red exclamation mark shows on the field$/) do
 end
 
 And(/^a validation message should appear: 'This email address is already registered'$/) do
-  #Watir::Wait.until {@page.already_exists_message.exists?}
   @page.tab_out
+  Watir::Wait.until {@page.already_exists_message.exists?}
   expect(@page.already_exists_message).to be_present
 end
 
@@ -73,7 +76,6 @@ end
 When(/^I type in the email field \- '(.*)', which (.*)$/) do |email, test|
   #@page.username("bbcid_email").click
   @page.username("bbcid_email").set(email)
-
 end
 
 Then(/^an orange exclamation mark shows on the field$/) do
@@ -160,4 +162,11 @@ end
 
 And(/^no label hint shows$/) do
   expect(@page.already_exists_message).not_to be_present
+end
+
+Then(/^there should be (\d+) validation messages one for the email and one for the password$/) do |arg|
+  #Watir::Wait.until {@page.email_address_invalid.exists?}
+  sleep(5)
+  expect(@page.email_address_invalid.present?).to eq(true)
+  expect(@page.password_too_short_message.present?).to eq(true)
 end

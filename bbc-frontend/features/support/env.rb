@@ -8,6 +8,8 @@ require 'rest-client'
 require 'json'
 require 'rspec/expectations'
 require 'pry'
+require 'pry-remote'
+require 'pry-nav'
 require 'minitest/unit'
 
 require_all 'lib'
