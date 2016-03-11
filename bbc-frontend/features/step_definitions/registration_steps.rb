@@ -88,8 +88,17 @@ And(/^there's a validation message for (email|password) showing \- '(.*)'$/) do 
       Watir::Wait.until {@page.email_address_invalid.exists?}
       expect(@page.email_address_invalid).to be_present
     when 'password'
-      Watir::Wait.until {@page.password_too_short_message.exists?}
-      expect(@page.password_too_short_message).to be_present
+      case validation_message
+        when 'This is too short'
+          Watir::Wait.until {@page.password_too_short_message.exists?}
+          expect(@page.password_too_short_message).to be_present
+        when 'This is too long'
+          Watir::Wait.until {@page.password_too_long_message.exists?}
+          expect(@page.password_too_long_message).to be_present
+        when 'Please enter your password'
+
+      end
+
   end
 end
 

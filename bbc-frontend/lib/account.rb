@@ -64,6 +64,9 @@ class Account < BBCBase
     warning_label("createpassword-container").span(class: "bbcid_validation_stringlength_greaterthan5")
   end
 
+  def password_too_long_message
+    warning_label("createpassword-container").span(class: "bbcid_validation_stringlength_lessthan51")
+  end
 
   def tab_out
     @browser.send_keys :tab
