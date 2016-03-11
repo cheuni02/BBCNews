@@ -81,19 +81,22 @@ end
 Then(/^an orange exclamation mark shows on the field$/) do
 end
 
-And(/^there's a validation message showing \- '(.*)'$/) do |validation_message|
+And(/^there's a validation message for (email|password) showing \- '(.*)'$/) do |field, validation_message|
   @page.tab_out
-  Watir::Wait.until {@page.email_address_invalid.exists?}
-  expect(@page.email_address_invalid).to be_present
+  case field
+    when 'email'
+      Watir::Wait.until {@page.email_address_invalid.exists?}
+      expect(@page.email_address_invalid).to be_present
+    when 'password'
+      Watir::Wait.until {@page.password_too_short_message.exists?}
+      expect(@page.password_too_short_message).to be_present
+  end
 end
 
 When(/^I type in the New password field \- '(.*)', which (.*)$/) do |password, test|
-
+  @page.password("bbcid_createpassword").set(password)
 end
 
-And(/^There's a validation message showing \- '(.*)'$/) do |validation_message|
-
-end
 
 Given(/^I type email 'test1@test\.com' into Email field$/) do
 

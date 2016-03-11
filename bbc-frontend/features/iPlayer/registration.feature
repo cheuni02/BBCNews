@@ -41,7 +41,7 @@ Scenario: Verify that an email address not registered with BBC before can be typ
 Scenario Outline: Verify that there are validation checks on the format of the email/username (negative)
   When I type in the email field - '<email>', which <test>
   Then an orange exclamation mark shows on the field
-  And there's a validation message showing - '<validation message>'
+  And there's a validation message for email showing - '<validation message>'
 
   Examples:
     | email       | test                                            | validation message               |
@@ -54,19 +54,19 @@ Scenario: Verify that there are validation messages even when nothing is entered
   And press 'Register'
   Then there should be 2 validation messages one for the email and one for the password
 
-#Scenario Outline: Verify that there are validation checks on the password entered (negative)
-#  When I type in the New password field - '<password>', which <test>
-#  Then an orange exclamation mark shows on the field
-#  And There's a validation message showing - '<validation message>'
-#
-#  Examples:
-#    | password                                            | test                                                         | validation message         |
-#    | a                                                   | 1 character, below the 6 character minimum for a password    | This is too short          |
-#    | abdce                                               | 5 characters, below the 6 character minimum for a password   | This is too short          |
-#    | axczczxczxczxzczxczxczxczxczxczxczczxczxczx!@£$1234 | 51 characters, above the 50 character maximum for a password | This is too long           |
-#    | axczczxczxczxz!@£$1234xczxczxczxczczxczxczxczxbnb   | 49 characters, below the 6 character minimum for a password  | This is too short          |
-#    |                                                     | is null                                                      | Please enter your password |
-#
+Scenario Outline: Verify that there are validation checks on the password entered (negative)
+  When I type in the New password field - '<password>', which <test>
+  Then an orange exclamation mark shows on the field
+  And there's a validation message for password showing - '<validation message>'
+
+  Examples:
+    | password                                            | test                                                         | validation message         |
+    | a                                                   | 1 character, below the 6 character minimum for a password    | This is too short          |
+    | abdce                                               | 5 characters, below the 6 character minimum for a password   | This is too short          |
+    | axczczxczxczxzczxczxczxczxczxczxczczxczxczx!@£$1234 | 51 characters, above the 50 character maximum for a password | This is too long           |
+    | axczczxczxczxz!@£$1234xczxczxczxczczxczxczxczxbnb   | 49 characters, below the 6 character minimum for a password  | This is too short          |
+    |                                                     | is null                                                      | Please enter your password |
+
 #Scenario Outline: Verify that a validation message appears when the first and confirmation passwords entered don't match and user cannot proceed registration
 #  Given I type email 'test1@test.com' into Email field
 #  When I type in the New password field - '<new password>'
