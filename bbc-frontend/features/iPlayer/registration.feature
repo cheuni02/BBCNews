@@ -18,7 +18,7 @@ Background: navigating to register page for a new user
 Scenario: Register successfully with an existing email and a new password (end to end happy path)
   Given I already have set up an email address set up
   When I type that email address into the Email field
-  And I type a password which is valid ie more than 6 characters : '1234567'
+  And I type a password which is valid ie more than 6 characters : 'Abcd!1234'
   And retype it in 'Confirm password'
   And press 'Register'
   Then I should be taken to the Your registration is complete page

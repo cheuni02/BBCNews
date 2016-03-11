@@ -11,16 +11,16 @@ class Account < BBCBase
     @browser.text_field(id: id)
   end
 
-  def submit_button(value)
-    @browser.button(id: "bbcid_submit_button", value: value)
+  def submit_button(value, status = '')
+    @browser.button(class: "bbcid-button submit#{status}", value: value)
   end
 
   def signin
     submit_button("Sign in")
   end
 
-  def register
-    submit_button("Register")
+  def register(status = '')
+    submit_button("Register",status)
   end
 
   def account_header(title)
@@ -50,5 +50,9 @@ class Account < BBCBase
 
   def email_address_invalid
     @browser.div(class: "bbcid-warning").label.span(class: "bbcid_validation_format_emailaddress")
+  end
+
+  def tab_out
+    @browser.send_keys :tab
   end
 end

@@ -19,20 +19,24 @@ end
 
 
 When(/^I type that email address into the Email field$/) do
-  @page = site.signin_page
+  # @page.username("bbcid_email").click
   @page.username("bbcid_email").set(ENV['EMAIL'])
+  #@page.tab_out
 end
 
 And(/^I type a password which is valid ie more than 6 characters : '(.*)'$/) do |password|
   ENV['PW']= password
   @page.password("bbcid_createpassword").set(ENV['PW'])
+  # @page.tab_out
 end
 
 And(/^retype it in 'Confirm password'$/) do
   @page.password("bbcid_confirmpassword").set(ENV['PW'])
+  # @page.tab_out
 end
 
 And(/^press 'Register'$/) do
+  Watir::Wait.while{@page.register(' disabled').present?}
   @page.register.when_present.click
 end
 
@@ -58,7 +62,8 @@ Then(/^a red exclamation mark shows on the field$/) do
 end
 
 And(/^a validation message should appear: 'This email address is already registered'$/) do
-  Watir::Wait.until {@page.already_exists_message.exists?}
+  #Watir::Wait.until {@page.already_exists_message.exists?}
+  @page.tab_out
   expect(@page.already_exists_message).to be_present
 end
 
@@ -66,13 +71,16 @@ Then(/^a green tick appears on the field$/) do
 end
 
 When(/^I type in the email field \- '(.*)', which (.*)$/) do |email, test|
+  #@page.username("bbcid_email").click
   @page.username("bbcid_email").set(email)
+
 end
 
 Then(/^an orange exclamation mark shows on the field$/) do
 end
 
 And(/^there's a validation message showing \- '(.*)'$/) do |validation_message|
+  @page.tab_out
   Watir::Wait.until {@page.email_address_invalid.exists?}
   expect(@page.email_address_invalid).to be_present
 end

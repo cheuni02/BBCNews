@@ -1,13 +1,15 @@
 Given(/^I am in the BBC iPlayer homepage$/) do
+  @page = site.signin_page
   site.iplayer_home.visit_page
 end
 
 Given(/^I already have set up an email address set up$/) do
+  @page = site.signin_page
   ENV['EMAIL'] = "#{Time.now.to_i}-test@example.com"
 end
 
 Given(/^I have an already registered BBC iD user with an email address$/) do
-
+  @page = site.signin_page
   if ENV['REG_STATUS'] != "registered"
     steps %(
       Given I already have set up an email address set up
@@ -22,5 +24,6 @@ Given(/^I have an already registered BBC iD user with an email address$/) do
 end
 
 Given(/^I have an email address not registered with BBC before$/) do
+  @page = site.signin_page
   steps %(Given I already have set up an email address set up)
 end
