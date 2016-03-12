@@ -75,4 +75,16 @@ class Account < BBCBase
   def sign_out_confirmation
     @browser.div(class: "bbcid-content signedout-icon")
   end
+
+  def green_tick
+    @browser.divs(class: "bbcid-valid")
+  end
+
+  def count_green_ticks
+    i=0
+    green_tick.each do |g|
+      i+=1
+    end
+    return i
+  end
 end

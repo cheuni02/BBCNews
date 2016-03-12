@@ -95,8 +95,6 @@ And(/^there's a validation message for (email|password) showing \- '(.*)'$/) do 
         when 'This is too long'
           Watir::Wait.until {@page.password_too_long_message.exists?}
           expect(@page.password_too_long_message).to be_present
-        when 'Please enter your password'
-
       end
 
   end
@@ -107,20 +105,28 @@ When(/^I type in the New password field \- '(.*)', which (.*)$/) do |password, t
 end
 
 
-Given(/^I type email 'test1@test\.com' into Email field$/) do
-
+Given(/^I type email '(.*)' into Email field$/) do |email|
+  @page.username("bbcid_email").set(email)
 end
 
-When(/^I type in the New password field \- '(.*)'$/) do |new_password|
+When(/^I type in the (New|Confirmation) password field \- '(.*)'$/) do |which, new_password|
+  case which
+    when 'New'
+      id = "bbcid_createpassword"
+    when 'Confirmation'
+      id = "bbcid_confirmpassword"
+  end
 
+  if new_password == ''
+    @page.password(id).set(nil)
+  else
+    @page.password(id).set(new_password)
+  end
 end
 
-And(/^I type in the Confirmation password field \- '(.*)'$/) do |confirm_password|
-
-end
 
 And(/^The 'Register' button is disabled$/) do
-
+  expect(@page.register(" disabled")).to be_present
 end
 
 When(/^I type in the New password field \- '(.*)' which is (.*)$/) do |new_password, test|
@@ -181,4 +187,8 @@ Then(/^there should be (\d+) validation messages one for the email and one for t
   sleep(5)
   expect(@page.email_address_invalid.present?).to eq(true)
   expect(@page.password_too_short_message.present?).to eq(true)
+end
+
+And(/^wait for the (\d+) green ticks to appear$/) do |arg|
+  Watir::Wait.until{@page.count_green_ticks == 3}
 end

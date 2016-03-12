@@ -20,6 +20,7 @@ Scenario: Register successfully with an existing email and a new password (end t
   When I type that email address into the Email field
   And I type a password which is valid ie more than 6 characters : 'Abcd!1234'
   And retype it in 'Confirm password'
+  And wait for the 3 green ticks to appear
   And press 'Register'
   Then I should be taken to the Your registration is complete page
   And I should recieve an email
@@ -65,23 +66,23 @@ Scenario Outline: Verify that there are validation checks on the password entere
     | abdce                                               | 5 characters, below the 6 character minimum for a password   | This is too short          |
     | axczczxczxczxzczxczxczxczxczxczxczczxczxczx!@£$1234 | 51 characters, above the 50 character maximum for a password | This is too long           |
     | axczczxczxczxz!@£$1234xczxczxczxczczxczxczxczxbnb   | 49 characters, below the 6 character minimum for a password  | This is too short          |
-    |                                                     | is null                                                      | Please enter your password |
 
-#Scenario Outline: Verify that a validation message appears when the first and confirmation passwords entered don't match and user cannot proceed registration
-#  Given I type email 'test1@test.com' into Email field
-#  When I type in the New password field - '<new password>'
-#  And I type in the Confirmation password field - '<confirm password>'
-#  Then an orange exclamation mark shows on the field
-#  And There's a validation message showing - '<validation message>'
-#  And The 'Register' button is disabled
-#
-#  Examples:
-#    | new password | confirm password | validation message    |
-#    | abcdefgh     |                  | These do not match    |
-#    |              | abcdefgh         | This is too short     |
-#    | abcd1234     | abcd12345        | These do not match    |
-#    | ABCD1234     | abcd1234         | These do not match    |
-#
+Scenario Outline: Verify that a validation message appears when the first and confirmation passwords entered don't match and user cannot proceed registration
+  Given I type email 'test1@test.com' into Email field
+  When I type in the New password field - '<new password>'
+  And I type in the Confirmation password field - '<confirm password>'
+  And press 'Register'
+  Then an orange exclamation mark shows on the field
+  And there's a validation message for password showing - '<validation message>'
+  And The 'Register' button is disabled
+
+  Examples:
+    | new password | confirm password | validation message    |
+    | abcdefgh     |                  | These do not match    |
+    |              | abcdefgh         | This is too short     |
+    | abcd1234     | abcd12345        | These do not match    |
+    | ABCD1234     | abcd1234         | These do not match    |
+
 #Scenario Outline: verify that password format validation messages take priority over mismatch messages
 #  Given I type email 'test1@test.com' into Email field
 #  When I type in the New password field - '<new password>' which is <test>
